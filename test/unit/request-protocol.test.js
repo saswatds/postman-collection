@@ -40,4 +40,30 @@ describe('RequestProtocol', function () {
 
         expect(protocol.type).to.eql('http');
     });
+
+    it('should not update protocol if type is not string', function () {
+        var protocol = new RequestProtocol({
+            type: 'http'
+        });
+
+        protocol.update({ type: 1 });
+
+        expect(protocol.type).to.eql('http');
+    });
+
+    it('should return affirmative when correct protocol is checked with .is api', function () {
+        var protocol = new RequestProtocol({
+            type: 'http'
+        });
+
+        expect(protocol.is('http')).to.be.ok();
+    });
+
+    it('should return negatove when in-correct protocol is checked with .is api', function () {
+        var protocol = new RequestProtocol({
+            type: 'http'
+        });
+
+        expect(protocol.is('websocket')).to.not.be.ok();
+    });
 });
